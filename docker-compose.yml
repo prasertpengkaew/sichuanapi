@@ -1,0 +1,54 @@
+version: '3.4'
+
+services:
+  sichuandb:
+    image: mysql:8.0.26
+    container_name: sichuandb
+    cap_add:
+      - SYS_NICE
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      - MYSQL_ROOT_PASSWORD=sichuandb
+    volumes:
+      - ./db-data/data:/var/lib/mysql
+      - ./db-data/log:/var/log/mysql
+
+  sichuanapi:
+    image: ${DOCKER_REGISTRY-}sichuanapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: on-failure
+    user: root
+    ports:
+      - "3000:80"
+    volumes:
+      - "/disk1:/app/disk1:rw"
+      - "~/.aspnet/https:/root/.aspnet/https:ro"
+      - "~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro"
+    # environment:
+    #   - VIRTUAL_PORT=8080
+    #   - VIRTUAL_HOST=wursaapi.luffa.app
+    #   - LETSENCRYPT_HOST=wursaapi.luffa.app
+    #   - LETSENCRYPT_EMAIL=petcharanon@gmail.com
+  sichuanpma:
+    depends_on:
+      - sichuandb
+    image: phpmyadmin/phpmyadmin
+    container_name: sichuanpma
+    restart: always
+    ports:
+     - '8080:80'
+    environment:
+      - PMA_HOST=sichuandb
+  cesfilepath:
+    image: nginx:1.13.12-alpine
+    restart: always
+    ports: 
+     - "3001:80"
+    volumes: 
+      - /disk1:/usr/share/nginx/html/file
+      - ./nginxConf/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./nginxConf/client_max_body_size.conf:/etc/nginx/conf.d/client_max_body_size.conf
