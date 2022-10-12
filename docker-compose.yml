@@ -3,6 +3,9 @@ version: '3.4'
 services:
   sichuandb:
     image: mysql:8.0.26
+    networks:
+      customnetwork:
+        ipv4_address: 172.31.34.125
     container_name: sichuandb
     cap_add:
       - SYS_NICE
@@ -17,6 +20,9 @@ services:
 
   sichuanapi:
     image: ${DOCKER_REGISTRY-}sichuanapi
+    networks:
+      customnetwork:
+        ipv4_address: 172.31.34.125
     build:
       context: .
       dockerfile: Dockerfile
@@ -36,6 +42,9 @@ services:
     depends_on:
       - sichuandb
     image: phpmyadmin/phpmyadmin
+    networks:
+      customnetwork:
+        ipv4_address: 172.31.34.125
     container_name: sichuanpma
     restart: always
     ports:
