@@ -24,8 +24,7 @@ services:
     user: root
     ports:
       - "3000:80"
-    volumes:
-      - "/disk1:/app/disk1:rw"
+    volumes:    
       - "~/.aspnet/https:/root/.aspnet/https:ro"
       - "~/.microsoft/usersecrets:/root/.microsoft/usersecrets:ro"
     # environment:
