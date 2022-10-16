@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sichuandb:
-    image: arm64v8/mysql
+    image: mysql
 
     container_name: sichuandb
     cap_add:
@@ -37,7 +37,7 @@ services:
   sichuanpma:
     depends_on:
       - sichuandb
-    image: arm64v8/phpmyadmin
+    image: phpmyadmin/phpmyadmin
     container_name: sichuanpma
     restart: always
     ports:
