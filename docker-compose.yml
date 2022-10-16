@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sichuandb:
-    image: hypriot/rpi-mysql
+    image: arm64v8/mysql
 
     container_name: sichuandb
     cap_add:
