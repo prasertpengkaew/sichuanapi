@@ -16,10 +16,7 @@ services:
       - ./db-data/log:/var/log/mysql
 
   sichuanapi:
-    image: ${DOCKER_REGISTRY-}sichuanapi
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: prasertpengkaew/sichuanapi
     restart: on-failure
     user: root
     ports:
