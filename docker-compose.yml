@@ -17,6 +17,10 @@ services:
 
   sichuanapi:
     image: ${DOCKER_REGISTRY-}sichuanapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+
     restart: on-failure
     user: root
     ports:
