@@ -18,7 +18,5 @@ RUN dotnet publish "sichuanapi.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-RUN mkdir -p disk1
-RUN chmod -R 777 disk1
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "sichuanapi.dll"]
