@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sichuandb:
-    image: mysql:8.0.26
+    image: arm64v8/mysql
     container_name: sichuandb
     cap_add:
       - SYS_NICE
@@ -16,7 +16,7 @@ services:
       - ./db-data/log:/var/log/mysql
 
   sichuanapi:
-    image: prasertpengkaew/sichuanapi
+    image: ${DOCKER_REGISTRY-}sichuanapi
     restart: on-failure
     user: root
     ports:
@@ -33,7 +33,7 @@ services:
   sichuanpma:
     depends_on:
       - sichuandb
-    image: phpmyadmin/phpmyadmin
+    image: arm64v8/phpmyadmin
     container_name: sichuanpma
     restart: on-failure
     ports:
