@@ -10,6 +10,7 @@ services:
     ports:
       - '3306:3306'
     environment:
+      - MYSQL_ROOT_USERNAME=root
       - MYSQL_ROOT_PASSWORD=sichuandb
     volumes:
       - ./db-data/data:/var/lib/mysql
