@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   sichuandb:
-    image: mysql
+    image: mysql:8.0.26
     container_name: sichuandb
     cap_add:
       - SYS_NICE
