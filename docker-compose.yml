@@ -33,7 +33,7 @@ services:
   sichuanpma:
     depends_on:
       - sichuandb
-    image: phpmyadmin/phpmyadmin
+    image: arm64v8/phpmyadmin
     container_name: sichuanpma
     restart: on-failure
     ports:
